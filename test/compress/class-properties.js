@@ -246,3 +246,27 @@ mangle_class_properties_keep_quoted: {
         }
     }
 }
+
+private_class_properties: {
+    no_mozilla_ast = true;
+    node_version = ">=14"
+    input: {
+        class A {
+            #private = "SS";
+            toString() {
+                return this.#private;
+            }
+        }
+        console.log(new A().toString())
+    }
+    expect: {
+        class A {
+            #private = "SS";
+            toString() {
+                return this.#private;
+            }
+        }
+        console.log(new A().toString())
+    }
+    expect_stdout: "SS"
+}

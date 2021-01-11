@@ -259,14 +259,6 @@ private_class_properties: {
         }
         console.log(new A().toString())
     }
-    expect: {
-        class A {
-            #private = "SS";
-            toString() {
-                return this.#private;
-            }
-        }
-        console.log(new A().toString())
-    }
+    expect_exact: 'class A{#private="SS";toString(){return this.#private}}console.log((new A).toString());'
     expect_stdout: "SS"
 }
